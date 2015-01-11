@@ -97,6 +97,9 @@ You may use `apxs`, SCons, or some other build system to be build and install
 the plugins. Also, it does not need to be placed in the same directory as the
 WebSocket module.
 
+Additional plugin mod_websocket_tcp_proxy by Alex Bligh allows serverless
+websocket configurations
+
 ## Configuration
 
 The `http.conf` file is used to configure WebSocket plugins to handle requests
@@ -225,9 +228,37 @@ example configuration could look under Mac OS X after removing the the
       </Location>
     </IfModule>
 
+### mod_websocket_tcp_proxy
+tcp_proxy is configured as follows with vnc as an example (taken from Alex's blog)
+
+The configuration section looks like this, in this case set up to proxy VNC using a novnc client:
+
+    <IfModule mod_websocket.c>
+      <Location /vncproxy>
+        SetHandler websocket-handler
+        WebSocketHandler  /usr/lib/apache2/modules/mod_websocket_tcp_proxy.so tcp_proxy_init
+        WebSocketTcpProxyBase64 on
+        WebSocketTcpProxyHost 192.168.199.199
+        WebSocketTcpProxyPort 5900
+        WebSocketTcpProxyProtocol base64
+      </Location>
+    </IfModule>
+
+Note that the parameter you specify for Location must not be a file or directory that exists with your docroot, or you will just get 404 or similar. So, in the above example you must not have a file or directory at ${DOCROOT}/vncproxy.
+
+I discovered that on a default apache install, you may also want to change the RequestReadTimeout, i.e.
+
+    <IfModule reqtimeout_module>
+      RequestReadTimeout body=300,minrate=1
+    </IfModule>
+
 ## Authors
 
 * The original code was written by `self.disconnect`.
+* mod_websocket_tcp_proxy by Alex Bligh
+  * http://blog.alex.org.uk/2012/02/16/using-apache-websocket-to-proxy-tcp-connection/
+  * http://blog.alex.org.uk/2012/09/11/apache-websockets-and-tcp-vnc-proxy/
+* packaging by Mark Spieth
 
 ## License
 
