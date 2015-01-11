@@ -1,0 +1,5 @@
+mod mod_websocket.so
+mod mod_websocket_draft76.so
+mod mod_websocket_tcp_proxy.so
+mod debian/websocket.load
+mod debian/websocket_draft76.load

@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+export DH_VERBOSE=1
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/scons.mk
+include /usr/share/cdbs/1/class/scons-vars.mk
+#include /usr/share/cdbs/1/rules/patchsys-quilt.mk
+
+DEB_SCONS_INSTALL_OPTIONS = INSTALL_PREFIX="debian/tmp"
+#DEB_SCONS_ENVVARS = INSTALL_PREFIX=debian/tmp
+
+binary-post-install/libapache2-mod-websocket::
+	dh_apache2 -p$(cdbs_curpkg)
+
+#clean::
+#	find . -name Makefile -print0 | xargs -0 rm || /bin/true
+#	find . -name *.log -print0 | xargs -0 rm || /bin/true
+#	chmod 755 tools/codegen/javatool/WSDL2C.sh
+

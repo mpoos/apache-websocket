@@ -1,0 +1,35 @@
+Source: apache-websocket
+Section: httpd
+Priority: optional
+Maintainer: Mark Spieth <mspieth@digivation.com.au>
+Build-Depends: debhelper (>= 7.0.50~), apache2 (>= 2.4), apache2-dev (>= 2.4)
+Standards-Version: 3.9.5
+Homepage: https://github.com/disconnect/apache-websocket
+Vcs-Git: 
+Vcs-Browser: https://github.com/disconnect/apache-websocket.git
+
+Package: apache-websocket
+Architecture: all
+Section: httpd
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Dummy package has no contents
+ .
+
+Package: libapache2-mod-websocket
+Architecture: any
+Section: httpd
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Websockets module for Apache2
+ The apache-websocket module is an Apache 2.x server module 
+ that may be used to process requests using the WebSocket 
+ protocol (RFC 6455) by an Apache 2.x server. 
+ The module consists of a plugin architecture for handling 
+ WebSocket messaging. 
+ .
+ This implementation supports protocol versions 7, 8, and 13, 
+ along with the older draft-76 of the WebSocket protocol. 
+ Support for draft-75 is disabled by default, but it may be 
+ enabled through the draft-76 module configuration.
+ .
+ This package contains the Apache 2 module for websockets
+

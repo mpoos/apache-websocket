@@ -1,0 +1,7 @@
+*.log
+*.substvars
+*.debhelper
+stamp*
+apache-websocket
+libapache2-mod-websocket
+files
